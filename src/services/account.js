@@ -1,5 +1,6 @@
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
-require("aws-sdk");
+// import sigV4Client from '../plugins/sigV4Client';
+// let AWS = require('aws-sdk');
 
 export default class Account {
 
@@ -10,15 +11,26 @@ export default class Account {
             return Account.instance;
         }
 
-        this.accessToken = '';
-        this.userAttributes = {};
+        this.userToken = '';
         this.region = "us-east-1";
         this.poolData = {
-            UserPoolId : "us-east-1_cyEVs5eYF",
-            ClientId : "178mjps0n1lr7o67fhfo56ktun"
+            UserPoolId : "us-east-1_YEqkmnPfa",
+            ClientId : "5tued675ds6nk4nc7ng7mq71bq"
         };
         this.userPool = new CognitoUserPool(this.poolData);
         this.cognitoUser = null;
+        this.lambdaUrl = 'https://oy3ujiyqf4.execute-api.us-east-1.amazonaws.com/dev/';
+
+        this.birthday = '';
+        this.gender = '';
+        this.homeCountry = '';
+        this.currentCountry = '';
+        this.instagramHandle = '';
+        this.twitterHandle = '';
+        this.youtubeUrl = '';
+        this.websiteUrl = '';
+        this.available = '';
+        this.bio = '';
 
         Account.instance = this;
     }
@@ -26,26 +38,17 @@ export default class Account {
     getCurrentSession = () => {
         return new Promise((resolve, reject) => {
             this.cognitoUser = this.userPool.getCurrentUser();
-            console.log(this.cognitoUser);
             if(this.cognitoUser !== null){
                 this.cognitoUser.getSession(function(err, session) {
                     if (err) {
-                        console.log(err);
                         reject(err);
                     }
-                    console.log('session validity: ' + session.isValid());
-                    this.cognitoUser.getUserAttributes(function(err, result) {
-                        if (err) {
-                            console.log(err);
-                            reject(err);
-                        }
-                        this.userAttributes = result;
-                        this.accessToken = this.cognitoUser.signInUserSession.accessToken.jwtToken;
-                        resolve({
-                            userAttributes: this.userAttributes,
-                            accessToken: this.accessToken
-                        });
-                    }.bind(this));
+
+                    this.userToken = this.cognitoUser.signInUserSession.idToken.jwtToken;
+                    resolve({
+                        userToken: this.userToken,
+                        loggedIn: true
+                    });
                 }.bind(this));
             }
         });
@@ -53,34 +56,35 @@ export default class Account {
     };
 
     logoutUser(){
-        console.log(this.cognitoUser);
         if (this.cognitoUser != null) {
             this.cognitoUser.signOut();
         }
     }
 
     registerUser = (email, name, pw) => {
+        return new Promise((resolve, reject) =>{
+            let attributeList = [];
+            let dataEmail = {
+                Name: 'email',
+                Value: email
+            };
+            let dataName = {
+                Name: 'name',
+                Value: name
+            };
 
-        let attributeList = [];
-        let dataEmail = {
-            Name: 'email',
-            Value: email
-        };
-        let dataName = {
-            Name: 'name',
-            Value: name
-        };
+            let attributeEmail = new CognitoUserAttribute(dataEmail);
+            let attributeName = new CognitoUserAttribute(dataName);
 
-        let attributeEmail = new CognitoUserAttribute(dataEmail);
-        let attributeName = new CognitoUserAttribute(dataName);
+            attributeList.push(attributeEmail);
+            attributeList.push(attributeName);
 
-        attributeList.push(attributeEmail);
-        attributeList.push(attributeName);
-
-        this.userPool.signUp(email, pw, attributeList, null, function(err, result){
-            if(err){console.log(err); return;}
-            this.cognitoUser = result.user;
-        }.bind(this));
+            this.userPool.signUp(email, pw, attributeList, null, function(err, result){
+                if(err){resolve({registered: false, message: err.message}); return;}
+                this.cognitoUser = result.user;
+                resolve({registered: true});
+            }.bind(this));
+        });
     };
 
     loginUser = (email, pw) => {
@@ -99,35 +103,41 @@ export default class Account {
 
             this.cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function(res){
-                    this.accessToken = res.getAccessToken().getJwtToken();
-                    console.log(res);
+                    this.userToken = res.getIdToken().getJwtToken();
 
                     this.cognitoUser.getUserAttributes(function(err, result) {
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
-                        this.userAttributes = result;
+                        if (err) {resolve({loggedIn: false, message: err.message}); return;}
+                        // this.createUserIfNotExists(this.userToken ,result[2].Value, result[3].Value);
+
                         resolve({
-                            userAttributes: this.userAttributes,
-                            accessToken: this.accessToken
+                            userToken: this.userToken,
+                            loggedIn: true
                         });
                     }.bind(this));
                 }.bind(this),
                 onFailure: function(err){
-                    console.log(err);
                     reject(err);
                 }
             })
         });
+    };
+
+    createUserIfNotExists = async (userToken, name, email) => {
+        const rawResponse = await fetch(this.lambdaUrl + 'users', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            },
+            body: JSON.stringify({email: email, name: name})
+        });
+        const content = await rawResponse.json();
+        console.log(content);
 
     };
 
-    // getUserAttributes = () => {
-    //     return this.userAttributes;
-    // };
-    //
-    // getAccessToken = () => {
-    //     return this.accessToken;
-    // };
+    setUserDetails = (details) => {
+
+    }
 }

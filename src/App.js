@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Account from './services/account';
 import './App.css';
-import Home from './components/Home';
-import Profile from './components/Profile';
-import Travellers from './components/Travellers';
-import Trips from './components/Trips';
-import LoginRegister from './components/LoginRegister';
+import Home from './components/HomePage';
+import Profile from './components/ProfilePage';
+import Travellers from './components/TravellersPage';
+import Trips from './components/TripsPage';
+import LoginRegister from './components/LoginRegisterPage';
+import RegConfirmPage from './components/RegConfirmPage';
 
 const account = new Account();
 
@@ -45,7 +46,8 @@ class App extends Component {
         this.props.getCurrentSession();
     }
     render() {
-        const isLoggedIn = this.props.accountReducer.userAttributes;
+        const isLoggedIn = this.props.accountReducer.userToken;
+
         let navLinks;
 
         if(isLoggedIn){
@@ -91,6 +93,7 @@ class App extends Component {
                     <Route path="/travellers" component={Travellers} />
                     <Route path="/trips" component={Trips} />
                     <Route path="/login-register" component={LoginRegister} />
+                    <Route path="/reg-conf" component={RegConfirmPage} />
                 </div>
             </Router>
         );

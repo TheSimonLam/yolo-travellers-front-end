@@ -11,8 +11,18 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     registerUserDispatch: (email, name, pw) => {
-        account.registerUser(email, name, pw);
-        //TODO: redirect to confirmation page
+        return account.registerUser(email, name, pw).then(
+            res => {
+                dispatch({
+                    type: 'SET_REGISTERED_USER',
+                    payload: res});
+            },
+            err => {
+                dispatch({
+                    type: 'SET_REGISTERED_USER',
+                    payload: err});
+            }
+        )
     },
     loginUserDispatch(email, pw){
         return account.loginUser(email, pw).then(
@@ -20,6 +30,11 @@ const mapDispatchToProps = dispatch => ({
                 dispatch({
                 type: 'SET_LOGGED_IN_USER',
                 payload: res});
+            },
+            err => {
+                dispatch({
+                    type: 'SET_LOGGED_IN_USER',
+                    payload: err});
             }
         )
     }
@@ -41,8 +56,12 @@ class LoginRegister extends Component {
         if (this.props.accountReducer.homepageRedirect === true) {
             return <Redirect to='/' />
         }
+        if (this.props.accountReducer.confirmationRedirect === true) {
+            return <Redirect to='/reg-conf' />
+        }
         return (
             <div>
+                {JSON.stringify(this.props.accountReducer.message)}
                 <button onClick={this.registerUser("malnomis99@gmail.com", "Simon Lam", "123passworD@")}>Click here to register</button>
                 <button onClick={this.loginUser("malnomis99@gmail.com", "123passworD@")}>Click here to Login</button>
             </div>
