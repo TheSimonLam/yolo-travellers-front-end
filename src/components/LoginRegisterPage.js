@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
+import Auth from '../services/auth';
 import Account from '../services/account';
 
+const auth = new Auth();
 const account = new Account();
 
 const mapStateToProps = state => ({
@@ -10,8 +12,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    registerUserDispatch: (email, name, pw) => {
-        return account.registerUser(email, name, pw).then(
+    registerUserDispatch: (authEmail, authName, pw) => {
+        return auth.registerUser(authEmail, authName, pw).then(
             res => {
                 dispatch({
                     type: 'SET_REGISTERED_USER',
@@ -24,28 +26,28 @@ const mapDispatchToProps = dispatch => ({
             }
         )
     },
-    loginUserDispatch(email, pw){
-        return account.loginUser(email, pw).then(
-            res => {
-                dispatch({
+    loginUserDispatch(authEmail, pw) {
+        return auth.loginUser(authEmail, pw).then((res) => {
+            account.createUserIfNotExists(auth.userToken, auth.authName, auth.authEmail);
+            dispatch({
                 type: 'SET_LOGGED_IN_USER',
-                payload: res});
-            },
-            err => {
-                dispatch({
-                    type: 'SET_LOGGED_IN_USER',
-                    payload: err});
-            }
-        )
+                payload: res
+            });
+        }).catch((err) => {
+            dispatch({
+                type: 'SET_LOGGED_IN_USER',
+                payload: err});
+        })
     }
+
 });
 
 class LoginRegister extends Component {
     constructor(){
         super();
-        this.registerUser = (email, name, pw) => ev => {
+        this.registerUser = (authEmail, authName, pw) => ev => {
             ev.preventDefault();
-            this.props.registerUserDispatch(email, name, pw);
+            this.props.registerUserDispatch(authEmail, authName, pw);
         };
         this.loginUser = (email, pw) => ev => {
             ev.preventDefault();

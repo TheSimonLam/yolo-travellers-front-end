@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Account from './services/account';
+import Auth from './services/auth';
 import './App.css';
 import Home from './components/HomePage';
 import Profile from './components/ProfilePage';
@@ -10,15 +10,15 @@ import Trips from './components/TripsPage';
 import LoginRegister from './components/LoginRegisterPage';
 import RegConfirmPage from './components/RegConfirmPage';
 
-const account = new Account();
+const auth = new Auth();
 
 const mapStateToProps = state => ({
     ...state
-})
+});
 
 const mapDispatchToProps = dispatch => ({
     getCurrentSession(){
-        return account.getCurrentSession().then(
+        return auth.getCurrentSession().then(
             res => dispatch({
                 type: 'SET_CURRENT_SESSION',
                 payload: res
@@ -26,13 +26,13 @@ const mapDispatchToProps = dispatch => ({
         )
     },
     logoutUserDispatch(){
-        account.logoutUser();
+        auth.logoutUser();
         dispatch({
             type: 'SET_LOGGED_OUT_USER',
             payload: {}
         })
     }
-})
+});
 
 class App extends Component {
     constructor(){
@@ -46,8 +46,7 @@ class App extends Component {
         this.props.getCurrentSession();
     }
     render() {
-        const isLoggedIn = this.props.accountReducer.userToken;
-
+        let isLoggedIn = this.props.accountReducer.userToken;
         let navLinks;
 
         if(isLoggedIn){

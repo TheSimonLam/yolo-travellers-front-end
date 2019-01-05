@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Account from "../services/account";
+import Auth from "../services/auth";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
-const account = new Account();
+const auth = new Auth();
 
 const mapStateToProps = state => ({
     ...state
@@ -10,7 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     registerUserDispatch: (email, name, pw) => {
-        return account.registerUser(email, name, pw).then(
+        return auth.registerUser(email, name, pw).then(
             res => {
                 dispatch({
                     type: 'SET_REGISTERED_USER',
@@ -27,6 +28,9 @@ const mapDispatchToProps = dispatch => ({
 
 class Profile extends Component {
     render() {
+        if (!this.props.accountReducer.loggedIn) {
+            return <Redirect to='/' />
+        }
         return (
             <div>
                 <h1>Profile</h1>

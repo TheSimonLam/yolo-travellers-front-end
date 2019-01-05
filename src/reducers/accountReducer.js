@@ -4,6 +4,7 @@ export default (state = {}, action) => {
             return {
                 userToken: action.payload.userToken,
                 homepageRedirect: action.payload.loggedIn,
+                loggedIn: action.payload.loggedIn,
                 message: action.payload.message
             };
         case 'SET_REGISTERED_USER':
