@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 
 class RegConfirmPage extends Component {
     render() {
-        if (this.props.accountReducer.confirmationRedirect === false) {
+        if (this.props.authReducer.confirmationRedirect === false) {
             return <Redirect to='/' />
         }
         return (

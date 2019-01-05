@@ -55,17 +55,17 @@ class LoginRegister extends Component {
         }
     }
     render() {
-        if (this.props.accountReducer.homepageRedirect === true) {
+        if (this.props.authReducer.homepageRedirect === true) {
             return <Redirect to='/' />
         }
-        if (this.props.accountReducer.confirmationRedirect === true) {
+        if (this.props.authReducer.confirmationRedirect === true) {
             return <Redirect to='/reg-conf' />
         }
         return (
             <div>
-                {JSON.stringify(this.props.accountReducer.message)}
-                <button onClick={this.registerUser("malnomis99@gmail.com", "Simon Lam", "123passworD@")}>Click here to register</button>
-                <button onClick={this.loginUser("malnomis99@gmail.com", "123passworD@")}>Click here to Login</button>
+                {JSON.stringify(this.props.authReducer.message)}
+                <button onClick={this.registerUser("malnomis99@googlemail.com", "Simon Lam", "123passworD@")}>Click here to register</button>
+                <button onClick={this.loginUser("malnomis99@googlemail.com", "123passworD@")}>Click here to Login</button>
             </div>
         );
     }

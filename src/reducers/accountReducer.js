@@ -1,23 +1,20 @@
 export default (state = {}, action) => {
     switch (action.type) {
-        case 'SET_LOGGED_IN_USER':
+        case 'SET_RETRIEVED_ACCOUNT_DETAILS':
             return {
-                userToken: action.payload.userToken,
-                homepageRedirect: action.payload.loggedIn,
-                loggedIn: action.payload.loggedIn,
-                message: action.payload.message
+                name: action.payload.name,
+                email: action.payload.email,
+                birthday: action.payload.birthday,
+                gender: action.payload.gender,
+                homeCountry: action.payload.homeCountry,
+                currentCountry: action.payload.currentCountry,
+                instagramHandle: action.payload.instagramHandle,
+                twitterHandle: action.payload.twitterHandle,
+                youtubeUrl: action.payload.youtubeUrl,
+                websiteUrl: action.payload.websiteUrl,
+                available: action.payload.available,
+                bio: action.payload.bio
             };
-        case 'SET_REGISTERED_USER':
-            return {
-                confirmationRedirect: action.payload.registered,
-                message: action.payload.message
-            };
-        case 'SET_CURRENT_SESSION':
-            return {
-                userToken: action.payload.userToken
-            };
-        case 'SET_LOGGED_OUT_USER':
-            return {};
         default:
             return state
     }

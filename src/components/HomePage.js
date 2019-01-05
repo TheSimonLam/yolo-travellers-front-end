@@ -14,7 +14,7 @@ class Home extends Component {
         return (
             <pre>
              {
-                 // JSON.stringify(this.props.accountReducer)
+                 // JSON.stringify(this.props.authReducer)
              }
             </pre>
         );

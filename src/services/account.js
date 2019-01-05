@@ -6,27 +6,9 @@ export default class Account {
         if(Account.instance){return Account.instance;}
 
         this.lambdaUrl = 'https://oy3ujiyqf4.execute-api.us-east-1.amazonaws.com/dev/';
-        this.birthday = '';
-        this.gender = '';
-        this.homeCountry = '';
-        this.currentCountry = '';
-        this.instagramHandle = '';
-        this.twitterHandle = '';
-        this.youtubeUrl = '';
-        this.websiteUrl = '';
-        this.available = '';
-        this.bio = '';
 
         Account.instance = this;
     }
-
-    handleTokenExpired = () => {
-        //TODO: if response is the below, then sign the user out
-        // {
-        //     "message": "The incoming token has expired"
-        // }
-    }
-
 
     createUserIfNotExists = async (userToken, authName, authEmail) => {
         const rawResponse = await fetch(this.lambdaUrl + 'users', {
@@ -37,11 +19,37 @@ export default class Account {
             },
             body: JSON.stringify({email: authEmail, name: authName})
         });
-        const content = await rawResponse.json();
-        return content;
+        await rawResponse.json();
     };
 
-    setUserDetails = (details) => {
+    setUserProfileDetails = (userToken, authEmail, details) => {
+        console.log(details);
+        return fetch(this.lambdaUrl + 'users/' + authEmail, {
+            method: 'PUT',
+            headers: {
+                'Authorization': userToken
+            },
+            body: JSON.stringify(details)
+        }).then(response => response.json())
+            .catch(err => {return err});
+    };
 
-    }
+    retrieveAccountDetailsByAuthEmail = (userToken, authEmail) => {
+        return fetch(this.lambdaUrl + 'users/' + authEmail, {
+            method: 'GET',
+            headers: {
+                'Authorization': userToken
+            }
+        }).then(response => response.json())
+            .catch(err => {return err});
+    };
+
+    handleTokenExpired = () => {
+        //TODO: if response is the below, then sign the user out
+        // {
+        //     "message": "The incoming token has expired"
+        // }
+    };
+
+
 }

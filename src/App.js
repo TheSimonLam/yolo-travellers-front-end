@@ -5,6 +5,7 @@ import Auth from './services/auth';
 import './App.css';
 import Home from './components/HomePage';
 import Profile from './components/ProfilePage';
+import EditProfile from './components/EditProfilePage';
 import Travellers from './components/TravellersPage';
 import Trips from './components/TripsPage';
 import LoginRegister from './components/LoginRegisterPage';
@@ -46,7 +47,8 @@ class App extends Component {
         this.props.getCurrentSession();
     }
     render() {
-        let isLoggedIn = this.props.accountReducer.userToken;
+        let isLoggedIn = this.props.authReducer.userToken;
+        let profileLink = "/profile/" + auth.authEmail;
         let navLinks;
 
         if(isLoggedIn){
@@ -55,7 +57,7 @@ class App extends Component {
                     <Link to="/">Home</Link>
                 </li>
                 <li className={'nav-bar-unordered-list-item'}>
-                    <Link to="/profile">Profile</Link>
+                    <Link to={profileLink}>Profile</Link>
                 </li>
                 <li className={'nav-bar-unordered-list-item'}>
                     <Link to="/travellers">Travellers</Link>
@@ -88,9 +90,10 @@ class App extends Component {
                     </div>
 
                     <Route exact path="/" component={Home} />
-                    <Route path="/profile" component={Profile} />
+                    <Route path="/profile/:authEmail" component={Profile} />
+                    <Route path="/edit-profile/:authEmail" component={EditProfile} />
                     <Route path="/travellers" component={Travellers} />
-                    <Route path="/trips" component={Trips} />
+                    <Route path="/trips/:tripId" component={Trips} />
                     <Route path="/login-register" component={LoginRegister} />
                     <Route path="/reg-conf" component={RegConfirmPage} />
                 </div>

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import Account from "../services/account";
 import Auth from "../services/auth";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
+const account = new Account();
 const auth = new Auth();
 
 const mapStateToProps = state => ({
@@ -10,43 +12,49 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    registerUserDispatch: (email, name, pw) => {
-        return auth.registerUser(email, name, pw).then(
-            res => {
-                dispatch({
-                    type: 'SET_REGISTERED_USER',
-                    payload: res});
-            },
-            err => {
-                dispatch({
-                    type: 'SET_REGISTERED_USER',
-                    payload: err});
+    setRetrievedAccountDetails(res){
+        dispatch({
+            type: 'SET_RETRIEVED_ACCOUNT_DETAILS',
+            payload: {
+                name: res.name, email: res.email, birthday: res.birthday, gender: res.gender,
+                homeCountry: res.homeCountry, currentCountry: res.currentCountry, instagramHandle: res.instagramHandle,
+                twitterHandle: res.twitterHandle, youtubeUrl: res.youtubeUrl, websiteUrl: res.websiteUrl,
+                available: res.available, bio: res.bio
             }
-        )
+        })
     }
 });
 
 class Profile extends Component {
+    componentDidMount(){
+        account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
+            this.props.setRetrievedAccountDetails(res);
+        })
+
+        this.goToEditProfilePage = () => {
+            this.props.history.push('/edit-profile/' + this.props.match.params.authEmail);
+        }
+    }
     render() {
-        if (!this.props.accountReducer.loggedIn) {
+        if (!this.props.authReducer.loggedIn) {
             return <Redirect to='/' />
         }
         return (
             <div>
+                <button onClick={this.goToEditProfilePage}>Edit</button>
                 <h1>Profile</h1>
-                <div>Instagram: {JSON.stringify(this.props.accountReducer)}</div>
-                <div>Name: {JSON.stringify(this.props.accountReducer.name)}</div>
-                <div>Email: {JSON.stringify(this.props.accountReducer.email)}</div>
-                <div>Birthday: {JSON.stringify(this.props.accountReducer.birthday)}</div>
-                <div>Gender: {JSON.stringify(this.props.accountReducer.gender)}</div>
-                <div>Home Country: {JSON.stringify(this.props.accountReducer.homeCountry)}</div>
-                <div>Current Country: {JSON.stringify(this.props.accountReducer.currentCountry)}</div>
-                <div>Instagram: {JSON.stringify(this.props.accountReducer.instagramHandle)}</div>
-                <div>Twitter: {JSON.stringify(this.props.accountReducer.twitterHandle)}</div>
-                <div>YouTube: {JSON.stringify(this.props.accountReducer.youtubeUrl)}</div>
-                <div>Website: {JSON.stringify(this.props.accountReducer.websiteUrl)}</div>
-                <div>Available: {JSON.stringify(this.props.accountReducer.available)}</div>
-                <div>Bio: {JSON.stringify(this.props.accountReducer.bio)}</div>
+                <div>Name: {this.props.accountReducer.name}</div>
+                <div>Email: {this.props.accountReducer.email}</div>
+                <div>Birthday: {this.props.accountReducer.birthday}</div>
+                <div>Gender: {this.props.accountReducer.gender}</div>
+                <div>Home Country: {this.props.accountReducer.homeCountry}</div>
+                <div>Current Country: {this.props.accountReducer.currentCountry}</div>
+                <div>Instagram: {this.props.accountReducer.instagramHandle}</div>
+                <div>Twitter: {this.props.accountReducer.twitterHandle}</div>
+                <div>YouTube: {this.props.accountReducer.youtubeUrl}</div>
+                <div>Website: {this.props.accountReducer.websiteUrl}</div>
+                <div>Available: {this.props.accountReducer.available}</div>
+                <div>Bio: {this.props.accountReducer.bio}</div>
             </div>
         );
     }

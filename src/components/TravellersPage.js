@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+
+const mapStateToProps = state => ({
+    ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
 
 class Travellers extends Component {
     render() {
-        if (!this.props.accountReducer.loggedIn) {
+        if (!this.props.authReducer.loggedIn) {
             return <Redirect to='/' />
         }
         return (
@@ -12,4 +21,4 @@ class Travellers extends Component {
     }
 }
 
-export default Travellers;
+export default connect(mapStateToProps, mapDispatchToProps)(Travellers);
