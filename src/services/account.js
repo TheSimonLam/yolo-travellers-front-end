@@ -43,6 +43,16 @@ export default class Account {
             .catch(err => {return err});
     };
 
+    getTotalNumberOfTravellers = (userToken) => {
+        return fetch(this.lambdaUrl + 'all-users/', {
+            method: 'GET',
+            headers: {
+                'Authorization': userToken
+            }
+        }).then(response => response.json())
+            .catch(err => {return err});
+    };
+
     handleTokenExpired = () => {
         //TODO: if response is the below, then sign the user out
         // {

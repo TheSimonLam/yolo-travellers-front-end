@@ -44,13 +44,11 @@ const mapDispatchToProps = dispatch => ({
 
 class EditProfile extends Component {
     componentDidMount(){
-        this.props.getCurrentSession();
-
-        if(this.props.authReducer.loggedIn){
+        this.props.getCurrentSession().then(() => {
             account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
                 this.props.setRetrievedAccountDetails(res);
             }).catch((err) => {console.log(err);});
-        }
+        });
 
         this.onDetailsInput = (evt) => {
             this.props.accountReducer[evt.target.name] = evt.target.value;

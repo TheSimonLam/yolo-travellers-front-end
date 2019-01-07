@@ -44,14 +44,11 @@ const mapDispatchToProps = dispatch => ({
 
 class Profile extends Component {
     componentDidMount(){
-        this.props.getCurrentSession();
-
-        if(this.props.authReducer.loggedIn){
+        this.props.getCurrentSession().then(() => {
             account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
                 this.props.setRetrievedAccountDetails(res);
             }).catch((err) => {console.log(err);});
-        }
-
+        });
 
         this.goToEditProfilePage = () => {
             this.props.history.push('/edit-profile/' + this.props.match.params.authEmail);

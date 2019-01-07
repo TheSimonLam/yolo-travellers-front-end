@@ -21,7 +21,9 @@ const mapDispatchToProps = dispatch => ({
 
 class Home extends Component {
     componentDidMount(){
-        this.props.getCurrentSession();
+        this.props.getCurrentSession().then(() => {
+            //TODO: Do stuff after getting session
+        });
     }
     render() {
         return (

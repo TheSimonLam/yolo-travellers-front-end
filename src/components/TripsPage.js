@@ -22,7 +22,9 @@ const mapDispatchToProps = dispatch => ({
 
 class Trips extends Component {
     componentDidMount(){
-        this.props.getCurrentSession();
+        this.props.getCurrentSession().then(() => {
+            //TODO: Do stuff after getting session
+        });
     }
     render() {
         if (!this.props.authReducer.loggedIn) {

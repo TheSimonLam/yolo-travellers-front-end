@@ -19,6 +19,10 @@ export default (state = {}, action) => {
             return {
                 noAccFound: action.payload.noAccFound,
             };
+        case 'SET_TOTAL_NUMBER_OF_TRAVELLERS':
+            return {
+                totalNumberOfTravellers: action.payload.travellers
+            };
         default:
             return state
     }
