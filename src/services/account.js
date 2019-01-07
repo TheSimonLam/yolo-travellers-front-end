@@ -44,7 +44,7 @@ export default class Account {
     };
 
     getTotalNumberOfTravellers = (userToken) => {
-        return fetch(this.lambdaUrl + 'all-users/', {
+        return fetch(this.lambdaUrl + 'total-users/', {
             method: 'GET',
             headers: {
                 'Authorization': userToken
