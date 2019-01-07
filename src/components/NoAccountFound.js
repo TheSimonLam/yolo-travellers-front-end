@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     resetNoAccFound(){
+        console.log('reset');
         dispatch({
             type: 'SET_NO_ACCOUNT_FOUND',
             payload: {noAccFound: false}
