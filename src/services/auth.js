@@ -29,7 +29,6 @@ export default class Auth {
                     if (err) {reject(err);}
                     this.userToken = session.getIdToken().getJwtToken();
                     this.authEmail = this.cognitoUser.username;
-                    console.log(this.userToken);
                     resolve({userToken: this.userToken, loggedIn: true});
                 }.bind(this));
             }

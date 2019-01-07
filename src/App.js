@@ -10,6 +10,7 @@ import Travellers from './components/TravellersPage';
 import Trips from './components/TripsPage';
 import LoginRegister from './components/LoginRegisterPage';
 import RegConfirmPage from './components/RegConfirmPage';
+import NoAccountFound from './components/NoAccountFound';
 
 const auth = new Auth();
 
@@ -18,14 +19,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getCurrentSession(){
-        return auth.getCurrentSession().then(
-            res => dispatch({
-                type: 'SET_CURRENT_SESSION',
-                payload: res
-            })
-        )
-    },
     logoutUserDispatch(){
         auth.logoutUser();
         dispatch({
@@ -42,9 +35,6 @@ class App extends Component {
             ev.preventDefault();
             this.props.logoutUserDispatch();
         };
-    }
-    componentDidMount(){
-        this.props.getCurrentSession();
     }
     render() {
         let isLoggedIn = this.props.authReducer.userToken;
@@ -96,6 +86,7 @@ class App extends Component {
                     <Route path="/trips/:tripId" component={Trips} />
                     <Route path="/login-register" component={LoginRegister} />
                     <Route path="/reg-conf" component={RegConfirmPage} />
+                    <Route path="/no-account-found" component={NoAccountFound} />
                 </div>
             </Router>
         );

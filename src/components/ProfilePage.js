@@ -13,23 +13,41 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setRetrievedAccountDetails(res){
-        dispatch({
-            type: 'SET_RETRIEVED_ACCOUNT_DETAILS',
-            payload: {
-                name: res.name, email: res.email, birthday: res.birthday, gender: res.gender,
-                homeCountry: res.homeCountry, currentCountry: res.currentCountry, instagramHandle: res.instagramHandle,
-                twitterHandle: res.twitterHandle, youtubeUrl: res.youtubeUrl, websiteUrl: res.websiteUrl,
-                available: res.available, bio: res.bio
-            }
-        })
+        if(!res.message){
+            dispatch({
+                type: 'SET_RETRIEVED_ACCOUNT_DETAILS',
+                payload: {
+                    name: res.name, email: res.email, birthday: res.birthday, gender: res.gender,
+                    homeCountry: res.homeCountry, currentCountry: res.currentCountry, instagramHandle: res.instagramHandle,
+                    twitterHandle: res.twitterHandle, youtubeUrl: res.youtubeUrl, websiteUrl: res.websiteUrl,
+                    available: res.available, bio: res.bio
+                }
+            })
+        }
+        else{
+            dispatch({
+                type: 'SET_NO_ACCOUNT_FOUND',
+                payload: {noAccFound: true}
+            })
+        }
+
+    },
+    getCurrentSession(){
+        return auth.getCurrentSession().then(
+            res => dispatch({
+                type: 'SET_CURRENT_SESSION',
+                payload: res
+            })
+        )
     }
 });
 
 class Profile extends Component {
     componentDidMount(){
+        this.props.getCurrentSession();
         account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
             this.props.setRetrievedAccountDetails(res);
-        })
+        }).catch((err) => {console.log(err);});
 
         this.goToEditProfilePage = () => {
             this.props.history.push('/edit-profile/' + this.props.match.params.authEmail);
@@ -37,7 +55,10 @@ class Profile extends Component {
     }
     render() {
         if (!this.props.authReducer.loggedIn) {
-            return <Redirect to='/' />
+            return <div>You are not logged in!</div>
+        }
+        if (this.props.accountReducer.noAccFound) {
+            return <Redirect to='/no-account-found' />
         }
         return (
             <div>

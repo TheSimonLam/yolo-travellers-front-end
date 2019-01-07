@@ -23,7 +23,6 @@ export default class Account {
     };
 
     setUserProfileDetails = (userToken, authEmail, details) => {
-        console.log(details);
         return fetch(this.lambdaUrl + 'users/' + authEmail, {
             method: 'PUT',
             headers: {

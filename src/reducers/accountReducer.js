@@ -15,6 +15,10 @@ export default (state = {}, action) => {
                 available: action.payload.available,
                 bio: action.payload.bio
             };
+        case 'SET_NO_ACCOUNT_FOUND':
+            return {
+                noAccFound: action.payload.noAccFound,
+            };
         default:
             return state
     }
