@@ -20,8 +20,8 @@ const mapDispatchToProps = dispatch => ({
             })
         )
     },
-    setTotalNumberOfTravellers(){
-        return auth.getCurrentSession().then(
+    setTravellers(){
+        return account.getTravellers(auth.userToken).then(
             res => dispatch({
                 type: 'SET_TOTAL_NUMBER_OF_TRAVELLERS',
                 payload: res
@@ -33,9 +33,7 @@ const mapDispatchToProps = dispatch => ({
 class Travellers extends Component {
     componentDidMount(){
         this.props.getCurrentSession().then(() => {
-            account.getTotalNumberOfTravellers(auth.userToken).then((res) => {
-                this.props.setTotalNumberOfTravellers(res)
-            });
+            this.props.setTravellers(auth.userToken);
         });
     }
     render() {
@@ -43,7 +41,7 @@ class Travellers extends Component {
             return <div>You are not logged in!</div>
         }
         return (
-            <div>{JSON.stringify(this.props.totalNumberOfTravellers)}</div>
+            <div>{JSON.stringify(this.props.accountReducer.travellers)}</div>
         );
     }
 }

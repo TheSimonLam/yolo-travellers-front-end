@@ -21,7 +21,7 @@ export default (state = {}, action) => {
             };
         case 'SET_TOTAL_NUMBER_OF_TRAVELLERS':
             return {
-                totalNumberOfTravellers: action.payload.travellers
+                travellers: action.payload
             };
         default:
             return state
