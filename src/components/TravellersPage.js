@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import Auth from "../services/auth";
-import Account from "../services/account";
+import Traveller from "../services/traveller";
 
 const auth = new Auth();
-const account = new Account();
+const traveller = new Traveller();
 
 const mapStateToProps = state => ({
     ...state
@@ -21,9 +20,9 @@ const mapDispatchToProps = dispatch => ({
         )
     },
     setTravellers(){
-        return account.getTravellers(auth.userToken).then(
+        return traveller.getTravellers(auth.userToken).then(
             res => dispatch({
-                type: 'SET_TOTAL_NUMBER_OF_TRAVELLERS',
+                type: 'SET_TRAVELLERS',
                 payload: res
             })
         )
@@ -41,7 +40,7 @@ class Travellers extends Component {
             return <div>You are not logged in!</div>
         }
         return (
-            <div>{JSON.stringify(this.props.accountReducer.travellers)}</div>
+            <div>{JSON.stringify(this.props.travellersReducer.travellers)}</div>
         );
     }
 }

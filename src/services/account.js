@@ -11,15 +11,15 @@ export default class Account {
     }
 
     createUserIfNotExists = async (userToken, authName, authEmail) => {
-        const rawResponse = await fetch(this.lambdaUrl + 'users', {
+        return fetch(this.lambdaUrl + 'users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': userToken
             },
             body: JSON.stringify({email: authEmail, name: authName})
-        });
-        await rawResponse.json();
+        }).then(response => response.json())
+            .catch(err => err);
     };
 
     setUserProfileDetails = (userToken, authEmail, details) => {
@@ -35,16 +35,6 @@ export default class Account {
 
     retrieveAccountDetailsByAuthEmail = (userToken, authEmail) => {
         return fetch(this.lambdaUrl + 'users/' + authEmail, {
-            method: 'GET',
-            headers: {
-                'Authorization': userToken
-            }
-        }).then(response => response.json())
-            .catch(err => {return err});
-    };
-
-    getTravellers = (userToken) => {
-        return fetch(this.lambdaUrl + 'users/', {
             method: 'GET',
             headers: {
                 'Authorization': userToken

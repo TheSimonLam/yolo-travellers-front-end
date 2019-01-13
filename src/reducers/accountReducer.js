@@ -17,11 +17,7 @@ export default (state = {}, action) => {
             };
         case 'SET_NO_ACCOUNT_FOUND':
             return {
-                noAccFound: action.payload.noAccFound,
-            };
-        case 'SET_TOTAL_NUMBER_OF_TRAVELLERS':
-            return {
-                travellers: action.payload
+                noAccFound: action.payload.noAccFound
             };
         default:
             return state

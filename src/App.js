@@ -8,9 +8,12 @@ import Profile from './components/ProfilePage';
 import EditProfile from './components/EditProfilePage';
 import Travellers from './components/TravellersPage';
 import Trips from './components/TripsPage';
+import Trip from './components/TripPage';
 import LoginRegister from './components/LoginRegisterPage';
 import RegConfirmPage from './components/RegConfirmPage';
 import NoAccountFound from './components/NoAccountFound';
+import NoTripFound from './components/NoTripFound';
+import CreateEditTrip from './components/CreateEditTripPage';
 
 const auth = new Auth();
 
@@ -53,7 +56,7 @@ class App extends Component {
                     <Link to="/travellers">Travellers</Link>
                 </li>
                 <li className={'nav-bar-unordered-list-item'}>
-                    <Link to="/trips">Trips</Link>
+                    <Link to="/all-trips">Trips</Link>
                 </li>
                 <li className={'nav-bar-unordered-list-item hover-hand'} onClick={this.logoutUser()}>Sign Out</li>
             </ul>
@@ -83,10 +86,13 @@ class App extends Component {
                     <Route path="/profile/:authEmail" component={Profile} />
                     <Route path="/edit-profile/:authEmail" component={EditProfile} />
                     <Route path="/travellers" component={Travellers} />
-                    <Route path="/trips/:tripId" component={Trips} />
+                    <Route path="/trips/:tripId" component={Trip} />
+                    <Route path="/all-trips/" component={Trips} />
                     <Route path="/login-register" component={LoginRegister} />
                     <Route path="/reg-conf" component={RegConfirmPage} />
                     <Route path="/no-account-found" component={NoAccountFound} />
+                    <Route path="/no-trip-found" component={NoTripFound} />
+                    <Route path="/create-edit-trip/:tripId?" component={CreateEditTrip} />
                 </div>
             </Router>
         );

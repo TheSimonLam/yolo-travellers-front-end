@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import Auth from "../services/auth";
+import Trip from "../services/trip";
 
 const auth = new Auth();
+const trip = new Trip();
 
 const mapStateToProps = state => ({
     ...state
@@ -17,21 +18,36 @@ const mapDispatchToProps = dispatch => ({
                 payload: res
             })
         )
+    },
+    setTrips(){
+        return trip.getTrips(auth.userToken).then(
+            res => dispatch({
+                type: 'SET_TRIPS',
+                payload: res
+            })
+        )
     }
 });
 
 class Trips extends Component {
     componentDidMount(){
         this.props.getCurrentSession().then(() => {
-            //TODO: Do stuff after getting session
+            this.props.setTrips(auth.userToken);
         });
+
+        this.goToCreateEditTrip = () => {
+            this.props.history.push('/create-edit-trip');
+        }
     }
     render() {
         if (!this.props.authReducer.loggedIn) {
-            return <Redirect to='/' />
+            return <div>You are not logged in!</div>
         }
         return (
-            <div>Trips</div>
+            <div>
+                <button onClick={this.goToCreateEditTrip}>Create Trip</button>
+                {JSON.stringify(this.props.tripsReducer.trips)}
+            </div>
         );
     }
 }
