@@ -77,7 +77,7 @@ class App extends Component {
                 <div>
                     <div className={'nav-bar-container'}>
                         <div className={'header-logo-container'}>
-                            <img src={require('./assets/yt-logo.png')} alt={''}/>
+                            <img className={'logo-image'} src={require('./assets/yt-logo.png')} alt={''}/>
                         </div>
                         {navLinks}
                     </div>
