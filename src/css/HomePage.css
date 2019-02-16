@@ -1,0 +1,58 @@
+.hero-container{
+    background-image: url("../assets/hero.jpg"); /* The image used */
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    text-align: center;
+    -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+    -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+    box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+}
+
+.hero-heading{
+    margin: 0;
+    position: relative;
+    top: 40%;
+    font-size: 4em;
+    color: #074684;
+}
+
+.summary-container{
+    background-color: #f2efb6;
+}
+
+.summary-image{
+    width: 100%;
+    border: 20px solid white;
+    border-radius: 20px;
+}
+
+.column-content{
+    margin: 50px;
+}
+
+.summary-heading{
+    margin: 0;
+    font-size: 2em;
+    color: #0ea5c6;
+    text-decoration: underline;
+}
+
+.summary-text{
+    color: #0ea5c6;
+    font-size: 2em;
+    line-height: 50px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
