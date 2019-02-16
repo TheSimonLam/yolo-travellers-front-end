@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Auth from './services/auth';
-import './App.css';
+import './css/App.css';
 import Home from './components/HomePage';
 import Profile from './components/ProfilePage';
 import EditProfile from './components/EditProfilePage';
@@ -76,10 +76,14 @@ class App extends Component {
             <Router>
                 <div>
                     <div className={'nav-bar-container'}>
-                        <div className={'header-logo-container'}>
-                            <img className={'logo-image'} src={require('./assets/yt-logo.png')} alt={''}/>
+                        <div className={'nav-bar-wrapper'}>
+                            <div className={'header-logo-container'}>
+                                <img className={'logo-image'} src={require('./assets/yt-logo.png')} alt={''}/>
+                            </div>
+                            <div className={'links-container'}>
+                                {navLinks}
+                            </div>
                         </div>
-                        {navLinks}
                     </div>
 
                     <Route exact path="/" component={Home} />
@@ -94,6 +98,7 @@ class App extends Component {
                     <Route path="/no-trip-found" component={NoTripFound} />
                     <Route path="/create-edit-trip/:tripId?" component={CreateEditTrip} />
                 </div>
+
             </Router>
         );
     }
