@@ -5,7 +5,12 @@ export default class Traveller {
     constructor(){
         if(Traveller.instance){return Traveller.instance;}
 
-        this.lambdaUrl = 'https://oy3ujiyqf4.execute-api.us-east-1.amazonaws.com/dev/';
+        if(process.env.NODE_ENV === "production"){
+            this.lambdaUrl = 'PROD URL GOES HERE!';
+        }
+        else{
+            this.lambdaUrl = 'https://oy3ujiyqf4.execute-api.us-east-1.amazonaws.com/dev/';
+        }
 
         Traveller.instance = this;
     }

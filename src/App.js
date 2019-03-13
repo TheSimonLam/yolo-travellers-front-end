@@ -97,6 +97,49 @@ class App extends Component {
                     <Route path="/no-account-found" component={NoAccountFound} />
                     <Route path="/no-trip-found" component={NoTripFound} />
                     <Route path="/create-edit-trip/:tripId?" component={CreateEditTrip} />
+
+                    <div className={"footer"}>
+                        <div className={"footer-container"}>
+                            <div className={"footer-logo-container"}>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/facebook.png")}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/instagram.png")}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/linkedin.png")}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/snapchat.png")}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/twitter.png")}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/youtube.png")}/></a>
+                            </div>
+                            <div className={"footer-site-links-container"}>
+                                <div className={"footer-site-links"}>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Berlin is a nice place</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Where's hot right now?</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Take me on a journey</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>I wanna go on holiday</a>
+                                </div>
+                                <div className={"footer-site-links"}>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>I wanna go on holiday</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Berlin is a nice place</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Take me on a journey</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Where's hot right now?</a>
+                                </div>
+                                <div className={"footer-site-links"}>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Where's hot right now?</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>I wanna go on holiday</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Berlin is a nice place</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Take me on a journey</a>
+                                </div>
+                                <div className={"footer-site-links"}>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Take me on a journey</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Where's hot right now?</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>I wanna go on holiday</a>
+                                    <a className={"footer-site-link"} href={"http://www.yolo.com"}>Berlin is a nice place</a>
+                                </div>
+                            </div>
+                            <div className={"footer-info"}>
+                                <img className={"footer-logo"} src={require("./assets/yt-logo.png")}/>
+                                <span className={"footer-text"}>Yolo Travellers (c) 2019 - All Rights Reserved.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </Router>
