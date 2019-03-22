@@ -1,0 +1,44 @@
+input{
+    width: calc(100%/ 1.2);
+    display: block;
+}
+
+.section{
+    min-height: 100vh;
+}
+
+.register-heading{
+    margin: 0;
+    font-size: 2em;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+.widget-container{
+    max-width: 700px;
+    background-color: #0ea5c6;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.widget-section{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.widget-heading{
+    margin: 0;
+}
+
+.widget-form-section{
+    padding: 10px 0;
+}
+
+.widget-form-input-container{
+    font-weight: bold;
+    padding: 10px 0;
+}

@@ -25,12 +25,19 @@ class Home extends Component {
         this.props.getCurrentSession().then(() => {
             //TODO: Do stuff after getting session
         });
+
+        this.goToSignUpPage = () => {
+            this.props.history.push('/login-register');
+        }
     }
     render() {
         return (
             <div>
                 <div className={"hero-container"}>
-                    <h1 className={"hero-heading"}>Explore the world together!</h1>
+                    <div className={"hero-button-container"}>
+                        <h1 className={"hero-heading"}>Explore the world together!</h1>
+                        <button className={"hero-button"} onClick={this.goToSignUpPage}>Sign up</button>
+                    </div>
                 </div>
 
                 <div className={"summary-container"}>
@@ -38,7 +45,7 @@ class Home extends Component {
                     <div className={"row"}>
                         <div className={"column"}>
                             <div className={"column-content"}>
-                                <img className={"summary-image"} src={require("../assets/polaroids.jpg")}/>
+                                <img className={"summary-image"} src={require("../assets/polaroids.jpg")} alt={"img"}/>
                             </div>
                         </div>
                         <div className={"column"}>

@@ -75,7 +75,7 @@ class App extends Component {
         return (
             <Router>
                 <div>
-                    <div className={'nav-bar-container'}>
+                    <nav className={'nav-bar-container'}>
                         <div className={'nav-bar-wrapper'}>
                             <div className={'header-logo-container'}>
                                 <img className={'logo-image'} src={require('./assets/yt-logo.png')} alt={''}/>
@@ -84,7 +84,7 @@ class App extends Component {
                                 {navLinks}
                             </div>
                         </div>
-                    </div>
+                    </nav>
 
                     <Route exact path="/" component={Home} />
                     <Route path="/profile/:authEmail" component={Profile} />
@@ -101,12 +101,12 @@ class App extends Component {
                     <div className={"footer"}>
                         <div className={"footer-container"}>
                             <div className={"footer-logo-container"}>
-                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/facebook.png")}/></a>
-                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/instagram.png")}/></a>
-                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/linkedin.png")}/></a>
-                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/snapchat.png")}/></a>
-                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/twitter.png")}/></a>
-                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/youtube.png")}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/facebook.png")} alt={"img"}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/instagram.png")} alt={"img"}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/linkedin.png")} alt={"img"}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/snapchat.png")} alt={"img"}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/twitter.png")} alt={"img"}/></a>
+                                <a className={"footer-social-logo"} href={"http://www.yolo.com"}><img src={require("./assets/social-media/youtube.png")} alt={"img"}/></a>
                             </div>
                             <div className={"footer-site-links-container"}>
                                 <div className={"footer-site-links"}>
@@ -135,7 +135,7 @@ class App extends Component {
                                 </div>
                             </div>
                             <div className={"footer-info"}>
-                                <img className={"footer-logo"} src={require("./assets/yt-logo.png")}/>
+                                <img className={"footer-logo"} src={require("./assets/yt-logo.png")} alt={"img"}/>
                                 <span className={"footer-text"}>Yolo Travellers (c) 2019 - All Rights Reserved.</span>
                             </div>
                         </div>
