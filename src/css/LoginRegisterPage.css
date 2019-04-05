@@ -1,0 +1,57 @@
+.widget-input{
+    width: 100%;
+    display: block;
+    border: 0;
+    padding: 5px 0 5px 5px;
+    margin: 0;
+    border-radius: 5px;
+    font-size: 1.0em;
+}
+
+.section{
+    min-height: 100vh;
+}
+
+.register-heading{
+    margin: 0;
+    font-size: 2em;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+.widget-container{
+    max-width: 700px;
+    background-color: #0ea5c6;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+
+.widget-section{
+    width: 47%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    padding: 10px;
+}
+
+.widget-heading{
+    margin: 0;
+}
+
+.widget-form__section{
+    padding: 10px 0;
+}
+
+.widget-form__input-container{
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.widget-form__button{
+    font-size: 1.0em;
+    border-radius: 5px;
+}

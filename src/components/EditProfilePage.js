@@ -85,20 +85,20 @@ class EditProfile extends Component {
         return (
             <div>
                 <h1>Edit Profile</h1>
-                <div>Name: <input name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>
+                <div>Name: <input className={"profile-info-input"} name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>
                 {/*TODO: Email and password have to be changed in Cognito!*/}
-                <div>Password: <input name="password" defaultValue={"*****"}/></div>
-                <div>Email: <input name="email" defaultValue={this.props.accountReducer.email}/></div>
-                <div>Birthday: <input name="birthday" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.birthday}/></div>
-                <div>Gender: <input name="gender" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.gender}/></div>
-                <div>Home Country: <input name="homeCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.homeCountry}/></div>
-                <div>Current Country: <input name="currentCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.currentCountry}/></div>
-                <div>Instagram: <input name="instagramHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.instagramHandle}/></div>
-                <div>Twitter: <input name="twitterHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.twitterHandle}/></div>
-                <div>YouTube: <input name="youtubeUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.youtubeUrl}/></div>
-                <div>Website: <input name="websiteUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.websiteUrl}/></div>
-                <div>Available: <input name="available" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.available}/></div>
-                <div>Bio: <input name="bio" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.bio}/></div>
+                <div>Password: <input className={"profile-info-input"} name="password" defaultValue={"*****"}/></div>
+                <div>Email: <input className={"profile-info-input"} name="email" defaultValue={this.props.accountReducer.email}/></div>
+                <div>Birthday: <input className={"profile-info-input"} name="birthday" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.birthday}/></div>
+                <div>Gender: <input className={"profile-info-input"} name="gender" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.gender}/></div>
+                <div>Home Country: <input className={"profile-info-input"} name="homeCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.homeCountry}/></div>
+                <div>Current Country: <input className={"profile-info-input"} name="currentCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.currentCountry}/></div>
+                <div>Instagram: <input className={"profile-info-input"} name="instagramHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.instagramHandle}/></div>
+                <div>Twitter: <input className={"profile-info-input"} name="twitterHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.twitterHandle}/></div>
+                <div>YouTube: <input className={"profile-info-input"} name="youtubeUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.youtubeUrl}/></div>
+                <div>Website: <input className={"profile-info-input"} name="websiteUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.websiteUrl}/></div>
+                <div>Available: <input className={"profile-info-input"} name="available" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.available}/></div>
+                <div>Bio: <input className={"profile-info-input"} name="bio" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.bio}/></div>
                 <button onClick={this.saveProfileData}>Save</button>
             </div>
         );

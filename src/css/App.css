@@ -59,7 +59,8 @@
 
 .footer-logo-container{
   text-align: center;
-  padding-bottom: 20px;
+  padding: 5px 0;
+  margin-bottom: 10px;
 }
 
 .footer-social-logo{
@@ -67,7 +68,7 @@
 }
 
 .footer-site-links-container{
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   text-align: left;
 }
 

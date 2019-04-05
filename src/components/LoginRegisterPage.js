@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import Auth from '../services/auth';
 import Account from '../services/account';
+import '../css/LoginRegisterPage.css';
 
 const auth = new Auth();
 const account = new Account();
@@ -55,6 +56,9 @@ class LoginRegister extends Component {
         }
     }
     render() {
+        if (this.props.authReducer.loggedIn) {
+            return <Redirect to='/' />
+        }
         if (this.props.authReducer.homepageRedirect === true) {
             return <Redirect to='/' />
         }
@@ -64,8 +68,33 @@ class LoginRegister extends Component {
         return (
             <div>
                 {JSON.stringify(this.props.authReducer.message)}
-                <button onClick={this.registerUser("malnomis99@googlemail.com", "Simon Lam", "123passworD@")}>Click here to register</button>
-                <button onClick={this.loginUser("malnomis99@googlemail.com", "123passworD@")}>Click here to Login</button>
+
+                <div className={"section"}>
+                    <h1 className={"register-heading"}>Register and explore the world!</h1>
+
+                    <div className={"widget-container"}>
+                        <div className={"widget-section"}>
+                            <h2 className={"widget-heading"}>Register</h2>
+                            <div className={"widget-form__section"}>
+                                <div className={"widget-form__input-container"}><span>First Name: </span><input className={"widget-input"}/></div>
+                                <div className={"widget-form__input-container"}><span>Second Name: </span><input className={"widget-input"}/></div>
+                                <div className={"widget-form__input-container"}><span>Email: </span><input className={"widget-input"}/></div>
+                                <div className={"widget-form__input-container"}><span>Confirm Email: </span><input className={"widget-input"}/></div>
+                                <div className={"widget-form__input-container"}><span>Password: </span><input className={"widget-input"}/></div>
+                                <div className={"widget-form__input-container"}><span>Password Confirm: </span><input className={"widget-input"}/></div>
+                            </div>
+                            <button className={"widget-form__button"} onClick={this.registerUser("malnomis99@googlemail.com", "Simon Lam", "123passworD@")}>Register</button>
+                        </div>
+                        <div className={"widget-section"}>
+                            <h2 className={"widget-heading"}>Login</h2>
+                            <div className={"widget-form__section"}>
+                                <div className={"widget-form__input-container"}><span>Email: </span><input className={"widget-input"}/></div>
+                                <div className={"widget-form__input-container"}><span>Password: </span><input className={"widget-input"}/></div>
+                            </div>
+                            <button className={"widget-form__button"} onClick={this.loginUser("malnomis99@googlemail.com", "123passworD@")}>Login</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
