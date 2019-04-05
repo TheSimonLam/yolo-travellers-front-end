@@ -26,14 +26,15 @@ class Home extends Component {
             //TODO: Do stuff after getting session
         });
 
-        this.goToSignUpPage = () => {
-            this.props.history.push('/login-register');
-        }
-
-        this.goToTripsPage = () => {
-            this.props.history.push('/all-trips');
-        }
+        this.goToSignUpPage = this.goToSignUpPage.bind(this);
+        this.goToTripsPage = this.goToTripsPage.bind(this);
     }
+    goToSignUpPage = () => {
+        this.props.history.push('/login-register');
+    };
+    goToTripsPage = () => {
+        this.props.history.push('/all-trips');
+    };
     render() {
         let heroButton;
 
