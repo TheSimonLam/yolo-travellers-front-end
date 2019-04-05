@@ -29,14 +29,26 @@ class Home extends Component {
         this.goToSignUpPage = () => {
             this.props.history.push('/login-register');
         }
+
+        this.goToTripsPage = () => {
+            this.props.history.push('/all-trips');
+        }
     }
     render() {
+        let heroButton;
+
+        if (!this.props.authReducer.loggedIn) {
+            heroButton = <button className={"hero-button"} onClick={this.goToSignUpPage}>Sign up</button>
+        }
+        else{
+            heroButton = <button className={"hero-button"} onClick={this.goToTripsPage}>See Trips</button>
+        }
         return (
             <div>
                 <div className={"hero-container"}>
                     <div className={"hero-button-container"}>
                         <h1 className={"hero-heading"}>Explore the world together!</h1>
-                        <button className={"hero-button"} onClick={this.goToSignUpPage}>Sign up</button>
+                        {heroButton}
                     </div>
                 </div>
 
@@ -61,11 +73,7 @@ class Home extends Component {
                     </div>
 
                 </div>
-
-
-
             </div>
-
         );
     }
 }
