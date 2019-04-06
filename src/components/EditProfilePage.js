@@ -80,12 +80,16 @@ class EditProfile extends Component {
             const validCheck = this.validateDetails(this.props.accountReducer);
             if(validCheck.valid){
                 const file = e.target.files[0];
+                const formData = new FormData();
 
-                account.setUserProfileImage(auth.userToken, this.props.match.params.authEmail, file).then((res) => {
+                formData.append('image', file, file.name);
+
+                account.setUserProfileImage(auth.userToken, this.props.match.params.authEmail, formData).then((res) => {
                     console.log(res);
                 }).catch((err) => {
                     console.log(err);
                 })
+
             }
             else{
                 console.log('false');

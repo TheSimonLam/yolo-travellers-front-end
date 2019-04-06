@@ -39,13 +39,12 @@ export default class Account {
     };
 
     setUserProfileImage = (userToken, authEmail, img) => {
-        console.log(img);
         return fetch(this.lambdaUrl + 'users/images/' + authEmail, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 'Authorization': userToken
             },
-            body: {img}
+            body: img
         }).then(response => response.json())
             .catch(err => {return err});
     };
