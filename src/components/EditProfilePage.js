@@ -83,14 +83,12 @@ class EditProfile extends Component {
                     reader = new FileReader();
 
                 reader.onloadend = () => {
-                    console.log(reader.result);
                     account.setUserProfileImage(auth.userToken, this.props.match.params.authEmail, reader.result).then((res) => {
                         console.log(res);
                     }).catch((err) => {
                         console.log(err);
                     })
                 }
-
                 reader.readAsDataURL(file);
             }
             else{
