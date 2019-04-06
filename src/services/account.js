@@ -9,7 +9,7 @@ export default class Account {
             this.lambdaUrl = 'PROD URL GOES HERE!';
         }
         else{
-            this.lambdaUrl = 'https://oy3ujiyqf4.execute-api.us-east-1.amazonaws.com/dev/';
+            this.lambdaUrl = 'https://7leo8yxg49.execute-api.us-east-1.amazonaws.com/dev/';
         }
 
         Account.instance = this;
@@ -34,6 +34,17 @@ export default class Account {
                 'Authorization': userToken
             },
             body: JSON.stringify(details)
+        }).then(response => response.json())
+            .catch(err => {return err});
+    };
+
+    setUserProfileImage = (userToken, authEmail, img) => {
+        return fetch(this.lambdaUrl + 'users-images/' + authEmail, {
+            method: 'PUT',
+            headers: {
+                'Authorization': userToken
+            },
+            body: {img}
         }).then(response => response.json())
             .catch(err => {return err});
     };

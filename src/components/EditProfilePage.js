@@ -3,6 +3,7 @@ import Account from "../services/account";
 import Auth from "../services/auth";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
+import '../css/EditProfilePage.css';
 
 const account = new Account();
 const auth = new Auth();
@@ -74,6 +75,23 @@ class EditProfile extends Component {
                 console.log(validCheck.errors);
             }
         }
+
+        this.saveProfileImage = (e) => {
+            const validCheck = this.validateDetails(this.props.accountReducer);
+            if(validCheck.valid){
+                const file = e.target.files[0];
+
+                account.setUserProfileImage(auth.userToken, this.props.match.params.authEmail, file).then((res) => {
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                })
+            }
+            else{
+                console.log('false');
+                console.log(validCheck.errors);
+            }
+        }
     }
     render() {
         if (!this.props.authReducer.loggedIn) {
@@ -85,6 +103,10 @@ class EditProfile extends Component {
         return (
             <div>
                 <h1>Edit Profile</h1>
+                <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
+                    <img className={"profile-image"} alt="profile-pic"/>
+                    <input type='file' id='single' onChange={this.saveProfileImage} />
+                </div>
                 <div>Name: <input className={"profile-info-input"} name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>
                 {/*TODO: Email and password have to be changed in Cognito!*/}
                 <div>Password: <input className={"profile-info-input"} name="password" defaultValue={"*****"}/></div>

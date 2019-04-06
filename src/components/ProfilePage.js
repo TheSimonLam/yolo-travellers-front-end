@@ -3,6 +3,7 @@ import Account from "../services/account";
 import Auth from "../services/auth";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
+import '../css/ProfilePage.css';
 
 const account = new Account();
 const auth = new Auth();
@@ -65,6 +66,9 @@ class Profile extends Component {
             <div>
                 <button onClick={this.goToEditProfilePage}>Edit</button>
                 <h1>Profile</h1>
+                <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
+                    <img className={"profile-image"} alt="profile-pic"/>
+                </div>
                 <div>Name: {this.props.accountReducer.name}</div>
                 <div>Email: {this.props.accountReducer.email}</div>
                 <div>Birthday: {this.props.accountReducer.birthday}</div>

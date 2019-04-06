@@ -9,7 +9,7 @@ export default class Traveller {
             this.lambdaUrl = 'PROD URL GOES HERE!';
         }
         else{
-            this.lambdaUrl = 'https://oy3ujiyqf4.execute-api.us-east-1.amazonaws.com/dev/';
+            this.lambdaUrl = 'https://7leo8yxg49.execute-api.us-east-1.amazonaws.com/dev/';
         }
 
         Traveller.instance = this;

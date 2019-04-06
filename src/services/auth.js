@@ -11,8 +11,8 @@ export default class Auth {
         this.authName = '';
         this.authEmail = '';
         this.poolData = {
-            UserPoolId : "us-east-1_YEqkmnPfa",
-            ClientId : "5tued675ds6nk4nc7ng7mq71bq"
+            UserPoolId : "us-east-1_dsOmZY9yx",
+            ClientId : "4k6lski8sbea8r34hslq35h29d"
         };
         this.userPool = new CognitoUserPool(this.poolData);
         this.cognitoUser = null;
@@ -21,7 +21,7 @@ export default class Auth {
             this.lambdaUrl = 'PROD URL GOES HERE!';
         }
         else{
-            this.lambdaUrl = 'https://oy3ujiyqf4.execute-api.us-east-1.amazonaws.com/dev/';
+            this.lambdaUrl = 'https://7leo8yxg49.execute-api.us-east-1.amazonaws.com/dev/';
         }
 
         Auth.instance = this;
