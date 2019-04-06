@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
                     name: res.name, email: res.email, birthday: res.birthday, gender: res.gender,
                     homeCountry: res.homeCountry, currentCountry: res.currentCountry, instagramHandle: res.instagramHandle,
                     twitterHandle: res.twitterHandle, youtubeUrl: res.youtubeUrl, websiteUrl: res.websiteUrl,
-                    available: res.available, bio: res.bio
+                    available: res.available, bio: res.bio, profilePicUrl: res.profilePicUrl
                 }
             })
         }
@@ -47,6 +47,7 @@ class Profile extends Component {
     componentDidMount(){
         this.props.getCurrentSession().then(() => {
             account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
+                console.log(res);
                 this.props.setRetrievedAccountDetails(res);
             }).catch((err) => {console.log(err);});
         });
@@ -67,7 +68,7 @@ class Profile extends Component {
                 <button onClick={this.goToEditProfilePage}>Edit</button>
                 <h1>Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img className={"profile-image"} alt="profile-pic"/>
+                    <img className={"profile-image"} src={this.props.accountReducer.profilePicUrl} alt="profile-pic"/>
                 </div>
                 <div>Name: {this.props.accountReducer.name}</div>
                 <div>Email: {this.props.accountReducer.email}</div>

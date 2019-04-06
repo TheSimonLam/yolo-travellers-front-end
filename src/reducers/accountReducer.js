@@ -13,7 +13,8 @@ export default (state = {}, action) => {
                 youtubeUrl: action.payload.youtubeUrl,
                 websiteUrl: action.payload.websiteUrl,
                 available: action.payload.available,
-                bio: action.payload.bio
+                bio: action.payload.bio,
+                profilePicUrl: action.payload.profilePicUrl
             };
         case 'SET_NO_ACCOUNT_FOUND':
             return {
