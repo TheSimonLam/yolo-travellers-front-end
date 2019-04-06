@@ -39,7 +39,8 @@ export default class Account {
     };
 
     setUserProfileImage = (userToken, authEmail, img) => {
-        return fetch(this.lambdaUrl + 'users-images/' + authEmail, {
+        console.log(img);
+        return fetch(this.lambdaUrl + 'users/images/' + authEmail, {
             method: 'PUT',
             headers: {
                 'Authorization': userToken
