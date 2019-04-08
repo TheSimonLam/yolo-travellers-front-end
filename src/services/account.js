@@ -38,17 +38,6 @@ export default class Account {
             .catch(err => {return err});
     };
 
-    setUserProfileImage = (userToken, authEmail, profilePicUrl) => {
-        return fetch(this.lambdaUrl + 'users/images/' + authEmail, {
-            method: 'PUT',
-            headers: {
-                'Authorization': userToken
-            },
-            body: profilePicUrl
-        }).then(response => response.json())
-            .catch(err => {return err});
-    };
-
     uploadUserProfileImage = (userToken, authEmail, img) => {
         return fetch(this.lambdaUrl + 'users/images/' + authEmail, {
             method: 'POST',
@@ -56,6 +45,16 @@ export default class Account {
                 'Authorization': userToken
             },
             body: img
+        }).then(response => response.json())
+            .catch(err => {return err});
+    };
+
+    getUserProfileImage = (userToken, authEmail) => {
+        return fetch(this.lambdaUrl + 'users/images/' + authEmail, {
+            method: 'GET',
+            headers: {
+                'Authorization': userToken
+            }
         }).then(response => response.json())
             .catch(err => {return err});
     };

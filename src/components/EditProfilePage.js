@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
                     name: res.name, email: res.email, birthday: res.birthday, gender: res.gender,
                     homeCountry: res.homeCountry, currentCountry: res.currentCountry, instagramHandle: res.instagramHandle,
                     twitterHandle: res.twitterHandle, youtubeUrl: res.youtubeUrl, websiteUrl: res.websiteUrl,
-                    available: res.available, bio: res.bio, profilePicUrl: res.profilePicUrl
+                    available: res.available, bio: res.bio
                 }
             })
         }
@@ -86,11 +86,7 @@ class EditProfile extends Component {
                     account.uploadUserProfileImage(auth.userToken, this.props.match.params.authEmail, reader.result).then((res) => {
                         let jsonRes = JSON.parse(res.body);
 
-                        account.setUserProfileImage(auth.userToken, this.props.match.params.authEmail, jsonRes.result).then(() => {
-                            document.getElementById("profile-image").src = jsonRes.result;
-                        }).catch((err) => {
-                            console.log(err);
-                        })
+                        document.getElementById("profile-image").src = jsonRes.result;
                     }).catch((err) => {
                         console.log(err);
                     })
@@ -101,6 +97,16 @@ class EditProfile extends Component {
                 console.log('false');
                 console.log(validCheck.errors);
             }
+        }
+        this.getProfilePicUrl = () => {
+            account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
+                console.log(res);
+                // let jsonRes = JSON.parse(res.body);
+                //
+                // return jsonRes.result;
+            }).catch((err) => {
+                console.log(err);
+            })
         }
     }
     render() {
@@ -114,7 +120,7 @@ class EditProfile extends Component {
             <div>
                 <h1>Edit Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img id={"profile-image"} className={"profile-image"} src={this.props.accountReducer.profilePicUrl}  alt="profile-pic"/>
+                    <img id={"profile-image"} className={"profile-image"} src={this.getProfilePicUrl()}  alt="profile-pic"/>
                     <input type='file' id='single' onChange={this.saveProfileImage} />
                 </div>
                 <div>Name: <input className={"profile-info-input"} name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>
