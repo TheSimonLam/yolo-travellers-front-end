@@ -98,16 +98,16 @@ class EditProfile extends Component {
                 console.log(validCheck.errors);
             }
         }
-        this.getProfilePicUrl = () => {
-            account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
-                console.log(res);
-                // let jsonRes = JSON.parse(res.body);
-                //
-                // return jsonRes.result;
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
+    }
+    getProfilePicUrl = () => {
+        account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
+            console.log(res);
+            // let jsonRes = JSON.parse(res.body);
+            //
+            // return jsonRes.result;
+        }).catch((err) => {
+            console.log(err);
+        })
     }
     render() {
         if (!this.props.authReducer.loggedIn) {

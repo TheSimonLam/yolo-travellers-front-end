@@ -49,8 +49,8 @@ export default class Account {
             .catch(err => {return err});
     };
 
-    getUserProfileImage = (userToken, authEmail) => {
-        return fetch(this.lambdaUrl + 'users/images/' + authEmail, {
+    getUserProfileImage = (userToken, email) => {
+        return fetch(this.lambdaUrl + 'users/images/' + email, {
             method: 'GET',
             headers: {
                 'Authorization': userToken
