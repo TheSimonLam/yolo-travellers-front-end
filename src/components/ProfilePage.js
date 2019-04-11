@@ -58,9 +58,6 @@ class Profile extends Component {
     getProfilePicUrl = () => {
         account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
             console.log(res);
-            // let jsonRes = JSON.parse(res.body);
-            //
-            // return jsonRes.result;
         }).catch((err) => {
             console.log(err);
         })

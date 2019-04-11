@@ -55,7 +55,7 @@ export default class Account {
             headers: {
                 'Authorization': userToken
             }
-        }).then(response => response.json())
+        }).then(response => response.json()) //TODO: This is a bit fucked
             .catch(err => {return err});
     };
 
