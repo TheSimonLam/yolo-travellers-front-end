@@ -98,10 +98,9 @@ class EditProfile extends Component {
                 console.log(validCheck.errors);
             }
         }
-    }
-    getProfilePicUrl = () => {
+
         account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
-            console.log(res);
+            document.getElementById("profile-image").src = res.fileUrl;
         }).catch((err) => {
             console.log(err);
         })
@@ -117,7 +116,7 @@ class EditProfile extends Component {
             <div>
                 <h1>Edit Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img id={"profile-image"} className={"profile-image"} src={this.getProfilePicUrl()}  alt="profile-pic"/>
+                    <img id={"profile-image"} className={"profile-image"} src=""  alt="profile-pic"/>
                     <input type='file' accept="image/jpeg" onChange={this.saveProfileImage} />
                 </div>
                 <div>Name: <input className={"profile-info-input"} name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>

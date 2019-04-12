@@ -54,10 +54,9 @@ class Profile extends Component {
         this.goToEditProfilePage = () => {
             this.props.history.push('/edit-profile/' + this.props.match.params.authEmail);
         }
-    }
-    getProfilePicUrl = () => {
+
         account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
-            console.log(res);
+            document.getElementById("profile-image").src = res.fileUrl;
         }).catch((err) => {
             console.log(err);
         })
@@ -74,7 +73,7 @@ class Profile extends Component {
                 <button onClick={this.goToEditProfilePage}>Edit</button>
                 <h1>Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img className={"profile-image"} src={this.getProfilePicUrl()} alt="profile-pic"/>
+                    <img className={"profile-image"} id="profile-image" src="" alt="profile-pic"/>
                 </div>
                 <div>Name: {this.props.accountReducer.name}</div>
                 <div>Email: {this.props.accountReducer.email}</div>
