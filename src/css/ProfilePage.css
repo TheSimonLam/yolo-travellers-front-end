@@ -8,6 +8,16 @@
     font-size: 1.0em;
 }
 
+.profile-container{
+    width: calc(100%/2);
+    display: inline-block;
+    background: #a0edf7;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    position: relative;
+}
+
 .profile-image-container{
     height: 200px;
     width: 200px;
@@ -17,6 +27,7 @@
     border-radius: 5px;
     position: relative;
     overflow: hidden;
+    display: inline-block;
 }
 
 .profile-image{
@@ -27,4 +38,25 @@
     right: -9999px;
     margin: auto;
     height: 100%;
+}
+
+.profile-fields-container{
+    text-align: left;
+    font-weight: bold;
+    line-height: 2;
+    color: #074684;
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.profile-heading{
+    color: #074684;
+}
+
+.profile-edit-button{
+    position: absolute;
+    top: 0;
+    right: 0;
 }

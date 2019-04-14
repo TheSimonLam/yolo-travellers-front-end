@@ -44,6 +44,17 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class EditProfile extends Component {
+    constructor () {
+        super();
+        this.state = {
+            fileSizeError: false
+        }
+    }
+    setFileSizeError (bool) {
+        this.setState({
+            fileSizeError: bool
+        })
+    }
     componentDidMount(){
         this.props.getCurrentSession().then(() => {
             account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
@@ -82,16 +93,23 @@ class EditProfile extends Component {
                 const file = e.target.files[0],
                     reader = new FileReader();
 
-                reader.onloadend = () => {
-                    account.uploadUserProfileImage(auth.userToken, this.props.match.params.authEmail, reader.result).then((res) => {
-                        let jsonRes = JSON.parse(res.body);
+                this.setFileSizeError(false);
 
-                        document.getElementById("profile-image").src = jsonRes.result;
-                    }).catch((err) => {
-                        console.log(err);
-                    })
+                if(file.size <= 2000000){
+                    reader.onloadend = () => {
+                        account.uploadUserProfileImage(auth.userToken, this.props.match.params.authEmail, reader.result).then((res) => {
+                            let jsonRes = JSON.parse(res.body);
+
+                            document.getElementById("profile-image").src = jsonRes.result;
+                        }).catch((err) => {
+                            console.log(err);
+                        })
+                    }
+                    reader.readAsDataURL(file);
                 }
-                reader.readAsDataURL(file);
+                else{
+                    this.setFileSizeError(true);
+                }
             }
             else{
                 console.log('false');
@@ -113,27 +131,34 @@ class EditProfile extends Component {
             return <Redirect to='/no-account-found' />
         }
         return (
-            <div className={"section"}>
-                <h1>Edit Profile</h1>
-                <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img className={"profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>
-                    <input type='file' accept="image/jpeg" onChange={this.saveProfileImage} />
+            <div className={"section text-align-center"}>
+                <div className={"edit-profile-container"}>
+                    <h1 className={"edit-profile-heading"}>Edit Profile</h1>
+                    <div className={"edit-profile-image-container"} onClick={this.goToEditProfilePage}>
+                        <img className={"edit-profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>
+                    </div>
+                    <div className={"profile-fields-container"}>
+                        {this.state.fileSizeError && <div>File size must be less than 2mb!</div>}
+                        <div className={"edit-profile-input-container"}>
+                            <input type='file' accept="image/jpeg" onChange={this.saveProfileImage} />
+                        </div>
+                        <div>Name: <input className={"edit-profile-info-input"} name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>
+                        {/*TODO: Email and password have to be changed in Cognito!*/}
+                        <div>Password: <input className={"edit-profile-info-input"} name="password" defaultValue={"*****"}/></div>
+                        <div>Email: <input className={"edit-profile-info-input"} name="email" defaultValue={this.props.accountReducer.email}/></div>
+                        <div>Birthday: <input className={"edit-profile-info-input"} name="birthday" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.birthday}/></div>
+                        <div>Gender: <input className={"edit-profile-info-input"} name="gender" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.gender}/></div>
+                        <div>Home Country: <input className={"edit-profile-info-input"} name="homeCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.homeCountry}/></div>
+                        <div>Current Country: <input className={"edit-profile-info-input"} name="currentCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.currentCountry}/></div>
+                        <div>Instagram: <input className={"edit-profile-info-input"} name="instagramHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.instagramHandle}/></div>
+                        <div>Twitter: <input className={"edit-profile-info-input"} name="twitterHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.twitterHandle}/></div>
+                        <div>YouTube: <input className={"edit-profile-info-input"} name="youtubeUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.youtubeUrl}/></div>
+                        <div>Website: <input className={"edit-profile-info-input"} name="websiteUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.websiteUrl}/></div>
+                        <div>Available: <input className={"edit-profile-info-input"} name="available" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.available}/></div>
+                        <div>Bio: <input className={"edit-profile-info-input"} name="bio" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.bio}/></div>
+                        <button onClick={this.saveProfileData}>Save</button>
+                    </div>
                 </div>
-                <div>Name: <input className={"profile-info-input"} name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>
-                {/*TODO: Email and password have to be changed in Cognito!*/}
-                <div>Password: <input className={"profile-info-input"} name="password" defaultValue={"*****"}/></div>
-                <div>Email: <input className={"profile-info-input"} name="email" defaultValue={this.props.accountReducer.email}/></div>
-                <div>Birthday: <input className={"profile-info-input"} name="birthday" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.birthday}/></div>
-                <div>Gender: <input className={"profile-info-input"} name="gender" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.gender}/></div>
-                <div>Home Country: <input className={"profile-info-input"} name="homeCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.homeCountry}/></div>
-                <div>Current Country: <input className={"profile-info-input"} name="currentCountry" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.currentCountry}/></div>
-                <div>Instagram: <input className={"profile-info-input"} name="instagramHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.instagramHandle}/></div>
-                <div>Twitter: <input className={"profile-info-input"} name="twitterHandle" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.twitterHandle}/></div>
-                <div>YouTube: <input className={"profile-info-input"} name="youtubeUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.youtubeUrl}/></div>
-                <div>Website: <input className={"profile-info-input"} name="websiteUrl" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.websiteUrl}/></div>
-                <div>Available: <input className={"profile-info-input"} name="available" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.available}/></div>
-                <div>Bio: <input className={"profile-info-input"} name="bio" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.bio}/></div>
-                <button onClick={this.saveProfileData}>Save</button>
             </div>
         );
     }

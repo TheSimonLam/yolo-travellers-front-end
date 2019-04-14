@@ -1,4 +1,4 @@
-.profile-info-input{
+.edit-profile-info-input{
     width: 100%;
     display: block;
     border: 0;
@@ -8,7 +8,16 @@
     font-size: 1.0em;
 }
 
-.profile-image-container{
+.edit-profile-container{
+    width: calc(100%/2);
+    display: inline-block;
+    background: #a0edf7;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.edit-profile-image-container{
     height: 200px;
     width: 200px;
     min-height: 200px;
@@ -17,9 +26,10 @@
     border-radius: 5px;
     position: relative;
     overflow: hidden;
+    display: inline-block;
 }
 
-.profile-image{
+.edit-profile-image{
     position: absolute;
     top: -9999px;
     bottom: -9999px;
@@ -27,4 +37,23 @@
     right: -9999px;
     margin: auto;
     height: 100%;
+}
+
+.edit-profile-fields-container{
+    text-align: left;
+    font-weight: bold;
+    line-height: 2;
+    color: #074684;
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.edit-profile-heading{
+    color: #074684;
+}
+
+.edit-profile-input-container{
+    text-align: center;
 }

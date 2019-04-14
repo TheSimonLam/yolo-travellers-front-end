@@ -69,24 +69,28 @@ class Profile extends Component {
             return <Redirect to='/no-account-found' />
         }
         return (
-            <div className={"section"}>
-                <button onClick={this.goToEditProfilePage}>Edit</button>
-                <h1>Profile</h1>
-                <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img className={"profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>
+            <div className={"section text-align-center"}>
+                <div className={"profile-container"}>
+                    <button className={"profile-edit-button"} onClick={this.goToEditProfilePage}>Edit Profile</button>
+                    <h1 className={"profile-heading"}>{this.props.accountReducer.name}'s Profile</h1>
+                    <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
+                        <img className={"profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>
+                    </div>
+                    <div className={"profile-fields-container"}>
+                        <div>Name: {this.props.accountReducer.name}</div>
+                        <div>Email: {this.props.accountReducer.email}</div>
+                        <div>Birthday: {this.props.accountReducer.birthday}</div>
+                        <div>Gender: {this.props.accountReducer.gender}</div>
+                        <div>Home Country: {this.props.accountReducer.homeCountry}</div>
+                        <div>Current Country: {this.props.accountReducer.currentCountry}</div>
+                        <div>Instagram: {this.props.accountReducer.instagramHandle}</div>
+                        <div>Twitter: {this.props.accountReducer.twitterHandle}</div>
+                        <div>YouTube: {this.props.accountReducer.youtubeUrl}</div>
+                        <div>Website: {this.props.accountReducer.websiteUrl}</div>
+                        <div>Available: {this.props.accountReducer.available}</div>
+                        <div>Bio: {this.props.accountReducer.bio}</div>
+                    </div>
                 </div>
-                <div>Name: {this.props.accountReducer.name}</div>
-                <div>Email: {this.props.accountReducer.email}</div>
-                <div>Birthday: {this.props.accountReducer.birthday}</div>
-                <div>Gender: {this.props.accountReducer.gender}</div>
-                <div>Home Country: {this.props.accountReducer.homeCountry}</div>
-                <div>Current Country: {this.props.accountReducer.currentCountry}</div>
-                <div>Instagram: {this.props.accountReducer.instagramHandle}</div>
-                <div>Twitter: {this.props.accountReducer.twitterHandle}</div>
-                <div>YouTube: {this.props.accountReducer.youtubeUrl}</div>
-                <div>Website: {this.props.accountReducer.websiteUrl}</div>
-                <div>Available: {this.props.accountReducer.available}</div>
-                <div>Bio: {this.props.accountReducer.bio}</div>
             </div>
         );
     }

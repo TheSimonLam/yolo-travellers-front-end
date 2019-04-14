@@ -39,10 +39,10 @@ class Home extends Component {
         let heroButton;
 
         if (!this.props.authReducer.loggedIn) {
-            heroButton = <button className={"hero-button"} onClick={this.goToSignUpPage}>Sign up</button>
+            heroButton = <button onClick={this.goToSignUpPage}>Sign up</button>
         }
         else{
-            heroButton = <button className={"hero-button"} onClick={this.goToTripsPage}>See Trips</button>
+            heroButton = <button onClick={this.goToTripsPage}>See Trips</button>
         }
         return (
             <div className={"section"}>
