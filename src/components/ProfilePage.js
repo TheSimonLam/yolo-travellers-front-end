@@ -69,7 +69,7 @@ class Profile extends Component {
             return <Redirect to='/no-account-found' />
         }
         return (
-            <div>
+            <div className={"section"}>
                 <button onClick={this.goToEditProfilePage}>Edit</button>
                 <h1>Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>

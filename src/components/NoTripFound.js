@@ -21,7 +21,7 @@ class NoTripFoundPage extends Component {
     }
     render() {
         return (
-            <div>No trip found!</div>
+            <div className={"section"}>No trip found!</div>
         );
     }
 }

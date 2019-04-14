@@ -44,7 +44,7 @@ class Trips extends Component {
             return <div>You are not logged in!</div>
         }
         return (
-            <div>
+            <div className={"section"}>
                 <button onClick={this.goToCreateEditTrip}>Create Trip</button>
                 {JSON.stringify(this.props.tripsReducer.trips)}
             </div>

@@ -40,7 +40,7 @@ class Travellers extends Component {
             return <div>You are not logged in!</div>
         }
         return (
-            <div>{JSON.stringify(this.props.travellersReducer.travellers)}</div>
+            <div className={"section"}>{JSON.stringify(this.props.travellersReducer.travellers)}</div>
         );
     }
 }

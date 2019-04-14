@@ -21,7 +21,7 @@ class RegConfirmPage extends Component {
             return <Redirect to='/' />
         }
         return (
-            <div>Gee whizz, thanks for registering! Check your email for the confirmation link :)</div>
+            <div className={"section"}>Gee whizz, thanks for registering! Check your email for the confirmation link :)</div>
         );
     }
     componentDidMount(){

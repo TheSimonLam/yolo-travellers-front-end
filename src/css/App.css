@@ -94,3 +94,7 @@
   vertical-align: middle;
   padding-left: 20px;
 }
+
+.section{
+  min-height: 100vh;
+}

@@ -92,7 +92,7 @@ class CreateEditTrip extends Component {
             return <Redirect to='/no-account-found' />
         }
         return (
-            <div>
+            <div className={"section"}>
                 {this.props.match.params.tripId ? (
                     <h1>Edit Trip</h1>
                 ) : (

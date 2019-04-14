@@ -45,7 +45,7 @@ class Home extends Component {
             heroButton = <button className={"hero-button"} onClick={this.goToTripsPage}>See Trips</button>
         }
         return (
-            <div>
+            <div className={"section"}>
                 <div className={"hero-container"}>
                     <div className={"hero-button-container"}>
                         <h1 className={"hero-heading"}>Explore the world together!</h1>

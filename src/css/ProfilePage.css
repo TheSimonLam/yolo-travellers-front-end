@@ -9,12 +9,22 @@
 }
 
 .profile-image-container{
-
-}
-
-.profile-image{
     height: 200px;
     width: 200px;
     min-height: 200px;
     min-width: 200px;
+    border: 5px solid #0ea5c6;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-image{
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+    height: 100%;
 }

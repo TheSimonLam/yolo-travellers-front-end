@@ -63,7 +63,7 @@ class Profile extends Component {
             editButton = <button onClick={this.goToEditTripPage}>Edit</button>;
         }
         return (
-            <div>
+            <div className={"section"}>
                 {editButton}
                 <h1>Trip</h1>
                 <div>Location: {this.props.tripReducer.loc}</div>

@@ -113,7 +113,7 @@ class EditProfile extends Component {
             return <Redirect to='/no-account-found' />
         }
         return (
-            <div>
+            <div className={"section"}>
                 <h1>Edit Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
                     <img className={"profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>

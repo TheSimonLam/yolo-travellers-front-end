@@ -21,7 +21,7 @@ class NoAccountFoundPage extends Component {
     }
     render() {
         return (
-            <div>No account found!</div>
+            <div className={"section"}>No account found!</div>
         );
     }
 }
