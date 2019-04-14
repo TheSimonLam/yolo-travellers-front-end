@@ -73,7 +73,7 @@ class Profile extends Component {
                 <button onClick={this.goToEditProfilePage}>Edit</button>
                 <h1>Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img className={"profile-image"} id="profile-image" src="" alt="profile-pic"/>
+                    <img className={"profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>
                 </div>
                 <div>Name: {this.props.accountReducer.name}</div>
                 <div>Email: {this.props.accountReducer.email}</div>

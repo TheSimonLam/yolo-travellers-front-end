@@ -13,9 +13,8 @@
 }
 
 .profile-image{
-    min-height: 100px;
-    min-width: 100px;
-    max-height: 200px;
-    max-width: 200px;
-    background-color: lightgray;
+    height: 200px;
+    width: 200px;
+    min-height: 200px;
+    min-width: 200px;
 }

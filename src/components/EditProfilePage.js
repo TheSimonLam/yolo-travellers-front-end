@@ -116,7 +116,7 @@ class EditProfile extends Component {
             <div>
                 <h1>Edit Profile</h1>
                 <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
-                    <img id={"profile-image"} className={"profile-image"} src=""  alt="profile-pic"/>
+                    <img className={"profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>
                     <input type='file' accept="image/jpeg" onChange={this.saveProfileImage} />
                 </div>
                 <div>Name: <input className={"profile-info-input"} name="name" onChange={this.onDetailsInput} defaultValue={this.props.accountReducer.name}/></div>
