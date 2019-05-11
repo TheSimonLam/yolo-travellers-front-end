@@ -60,6 +60,8 @@ class Profile extends Component {
         }).catch((err) => {
             console.log(err);
         })
+
+        console.log(this.props);
     }
     render() {
         if (!this.props.authReducer.loggedIn) {
@@ -71,7 +73,9 @@ class Profile extends Component {
         return (
             <div className={"section text-align-center"}>
                 <div className={"profile-container"}>
-                    <button className={"profile-edit-button"} onClick={this.goToEditProfilePage}>Edit Profile</button>
+                    {this.props.match.params.authEmail === this.props.accountReducer.email &&
+                        <button className={"profile-edit-button"} onClick={this.goToEditProfilePage}>Edit Profile</button>
+                    }
                     <h1 className={"profile-heading"}>{this.props.accountReducer.name}'s Profile</h1>
                     <div className={"profile-image-container"} onClick={this.goToEditProfilePage}>
                         <img className={"profile-image"} id="profile-image" src={require("../assets/default-profile-pic.jpg")} alt=""/>

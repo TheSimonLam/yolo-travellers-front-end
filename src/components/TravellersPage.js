@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Auth from "../services/auth";
 import Traveller from "../services/traveller";
+import TravellerTab from "./TravellerTab";
+import "../css/TravellersPage.css";
 
 const auth = new Auth();
 const traveller = new Traveller();
@@ -11,7 +13,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getCurrentSession(){
+    getCurrentSession() {
         return auth.getCurrentSession().then(
             res => dispatch({
                 type: 'SET_CURRENT_SESSION',
@@ -19,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
             })
         )
     },
-    setTravellers(){
+    setTravellers() {
         return traveller.getTravellers(auth.userToken).then(
             res => dispatch({
                 type: 'SET_TRAVELLERS',
@@ -30,7 +32,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Travellers extends Component {
-    componentDidMount(){
+    componentDidMount() {
+        this.props.travellersReducer.travellers = [];
         this.props.getCurrentSession().then(() => {
             this.props.setTravellers(auth.userToken);
         });
@@ -39,8 +42,17 @@ class Travellers extends Component {
         if (!this.props.authReducer.loggedIn) {
             return <div>You are not logged in!</div>
         }
+
+        let travellerTabs = this.props.travellersReducer.travellers.map((traveller, index) => (
+            <TravellerTab key={index} traveller={traveller}></TravellerTab>
+        ));
+
         return (
-            <div className={"section"}>{JSON.stringify(this.props.travellersReducer.travellers)}</div>
+            <div className={"section"}>
+                <div className={"travellers-container"}>
+                    {travellerTabs}
+                </div>
+            </div>
         );
     }
 }
