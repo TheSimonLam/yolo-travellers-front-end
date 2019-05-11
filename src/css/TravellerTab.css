@@ -1,0 +1,11 @@
+.traveller-tab-container{
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 3px;
+    display: inline-block;
+    margin: 0 30px;
+}
+
+.traveller-heading{
+    display: block;
+}
