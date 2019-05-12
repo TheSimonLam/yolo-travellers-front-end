@@ -59,6 +59,7 @@ class EditProfile extends Component {
         this.props.getCurrentSession().then(() => {
             account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
                 this.props.setRetrievedAccountDetails(res);
+                document.getElementById("profile-image").src = res.profilePicUrl;
             }).catch((err) => {console.log(err);});
         });
 
@@ -95,20 +96,20 @@ class EditProfile extends Component {
 
                 this.setFileSizeError(false);
 
-                if(file.size <= 2000000){
-                    reader.onloadend = () => {
-                        account.uploadUserProfileImage(auth.userToken, this.props.match.params.authEmail, reader.result).then((res) => {
-                            let jsonRes = JSON.parse(res.body);
-
-                            document.getElementById("profile-image").src = jsonRes.result;
-                        }).catch((err) => {
-                            console.log(err);
-                        })
+                if(file){
+                    if(file.size <= 2000000){
+                        reader.onloadend = () => {
+                            account.uploadUserProfileImage(auth.userToken, this.props.match.params.authEmail, reader.result).then((res) => {
+                                document.getElementById("profile-image").src = res.profilePicUrl + "?" + new Date().getTime(); //Get time so it refreshes <img> src
+                            }).catch((err) => {
+                                console.log(err);
+                            })
+                        }
+                        reader.readAsDataURL(file);
                     }
-                    reader.readAsDataURL(file);
-                }
-                else{
-                    this.setFileSizeError(true);
+                    else{
+                        this.setFileSizeError(true);
+                    }
                 }
             }
             else{
@@ -116,12 +117,6 @@ class EditProfile extends Component {
                 console.log(validCheck.errors);
             }
         }
-
-        account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
-            document.getElementById("profile-image").src = res.fileUrl;
-        }).catch((err) => {
-            console.log(err);
-        })
     }
     render() {
         if (!this.props.authReducer.loggedIn) {

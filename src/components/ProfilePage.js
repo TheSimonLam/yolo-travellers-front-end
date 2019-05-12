@@ -48,20 +48,13 @@ class Profile extends Component {
         this.props.getCurrentSession().then(() => {
             account.retrieveAccountDetailsByAuthEmail(auth.userToken, this.props.match.params.authEmail).then((res) => {
                 this.props.setRetrievedAccountDetails(res);
+                document.getElementById("profile-image").src = res.profilePicUrl;
             }).catch((err) => {console.log(err);});
         });
 
         this.goToEditProfilePage = () => {
             this.props.history.push('/edit-profile/' + this.props.match.params.authEmail);
         }
-
-        account.getUserProfileImage(auth.userToken, this.props.match.params.authEmail).then((res) => {
-            document.getElementById("profile-image").src = res.fileUrl;
-        }).catch((err) => {
-            console.log(err);
-        })
-
-        console.log(this.props);
     }
     render() {
         if (!this.props.authReducer.loggedIn) {
