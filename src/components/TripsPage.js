@@ -11,28 +11,19 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getCurrentSession(){
-        return auth.getCurrentSession().then(
-            res => dispatch({
-                type: 'SET_CURRENT_SESSION',
-                payload: res
-            })
-        )
-    },
-    setTrips(){
-        return trip.getTrips(auth.userToken).then(
-            res => dispatch({
-                type: 'SET_TRIPS',
-                payload: res
-            })
-        )
-    }
+
 });
 
 class Trips extends Component {
+    constructor(){
+        super();
+        this.state = {
+            trips: []
+        };
+    }
     componentDidMount(){
-        this.props.getCurrentSession().then(() => {
-            this.props.setTrips(auth.userToken);
+        trip.getTrips(auth.userToken).then((res) => {
+            this.setState({trips: res});
         });
 
         this.goToCreateEditTrip = () => {
@@ -46,7 +37,7 @@ class Trips extends Component {
         return (
             <div className={"section"}>
                 <button onClick={this.goToCreateEditTrip}>Create Trip</button>
-                {JSON.stringify(this.props.tripsReducer.trips)}
+                {JSON.stringify(this.state.trips)}
             </div>
         );
     }

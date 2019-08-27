@@ -8,7 +8,7 @@ import Profile from './components/ProfilePage';
 import EditProfile from './components/EditProfilePage';
 import Travellers from './components/TravellersPage';
 import Trips from './components/TripsPage';
-import Trip from './components/TripPage';
+import TripDetail from './components/TripDetailPage';
 import LoginRegister from './components/LoginRegisterPage';
 import RegConfirmPage from './components/RegConfirmPage';
 import NoAccountFound from './components/NoAccountFound';
@@ -22,6 +22,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    getCurrentSession() {
+        return auth.getCurrentSession().then(
+            res => dispatch({
+                type: 'SET_CURRENT_SESSION',
+                payload: res
+            })
+        )
+    },
     logoutUserDispatch(){
         auth.logoutUser();
         dispatch({
@@ -32,12 +40,13 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class App extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.logoutUser = () => ev => {
             ev.preventDefault();
             this.props.logoutUserDispatch();
         };
+        this.props.getCurrentSession();
     }
     render() {
         let isLoggedIn = this.props.authReducer.userToken;
@@ -87,13 +96,13 @@ class App extends Component {
                     </nav>
 
                     <Route exact path="/" component={Home} />
+                    <Route path="/login-register" component={LoginRegister} />
+                    <Route path="/reg-conf" component={RegConfirmPage} />
                     <Route path="/profile/:authEmail" component={Profile} />
                     <Route path="/edit-profile/:authEmail" component={EditProfile} />
                     <Route path="/travellers" component={Travellers} />
-                    <Route path="/trips/:tripId" component={Trip} />
+                    <Route path="/trips/:tripId" component={TripDetail} />
                     <Route path="/all-trips/" component={Trips} />
-                    <Route path="/login-register" component={LoginRegister} />
-                    <Route path="/reg-conf" component={RegConfirmPage} />
                     <Route path="/no-account-found" component={NoAccountFound} />
                     <Route path="/no-trip-found" component={NoTripFound} />
                     <Route path="/create-edit-trip/:tripId?" component={CreateEditTrip} />

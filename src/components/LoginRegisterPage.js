@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import Auth from '../services/auth';
-import Account from '../services/account';
 import '../css/LoginRegisterPage.css';
 
 const auth = new Auth();
-const account = new Account();
 
 const mapStateToProps = state => ({
     ...state
@@ -29,7 +27,6 @@ const mapDispatchToProps = dispatch => ({
     },
     loginUserDispatch(authEmail, pw) {
         return auth.loginUser(authEmail, pw).then((res) => {
-            account.createUserIfNotExists(auth.userToken, auth.authName, auth.authEmail);
             dispatch({
                 type: 'SET_LOGGED_IN_USER',
                 payload: res

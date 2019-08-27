@@ -36,7 +36,7 @@ export default class Trip {
     };
 
     createTrip = async (userToken, tripDetails) => {
-        return fetch(this.lambdaUrl + 'trips', {
+        return fetch(this.lambdaUrl + 'trips/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +48,6 @@ export default class Trip {
     };
 
     updateTrip = (userToken, tripId, tripDetails) => {
-        console.log(tripDetails)
         return fetch(this.lambdaUrl + 'trips/' + tripId, {
             method: 'PUT',
             headers: {

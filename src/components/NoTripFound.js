@@ -6,19 +6,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    resetNoTripFound(){
-        console.log('reset no trip found');
-        dispatch({
-            type: 'SET_NO_TRIP_FOUND',
-            payload: {noTripFound: false}
-        })
-    }
+
 })
 
 class NoTripFoundPage extends Component {
-    componentDidMount(){
-        this.props.resetNoTripFound();
-    }
     render() {
         return (
             <div className={"section"}>No trip found!</div>

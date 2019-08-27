@@ -13,29 +13,19 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getCurrentSession() {
-        return auth.getCurrentSession().then(
-            res => dispatch({
-                type: 'SET_CURRENT_SESSION',
-                payload: res
-            })
-        )
-    },
-    setTravellers() {
-        return traveller.getTravellers(auth.userToken).then(
-            res => dispatch({
-                type: 'SET_TRAVELLERS',
-                payload: res
-            })
-        )
-    }
+
 });
 
 class Travellers extends Component {
+    constructor(){
+        super();
+        this.state = {
+            travellers: []
+        };
+    }
     componentDidMount() {
-        this.props.travellersReducer.travellers = [];
-        this.props.getCurrentSession().then(() => {
-            this.props.setTravellers(auth.userToken);
+        traveller.getTravellers(auth.userToken).then((res)=>{
+            this.setState({travellers: res});
         });
     }
     render() {
@@ -43,7 +33,7 @@ class Travellers extends Component {
             return <div>You are not logged in!</div>
         }
 
-        let travellerTabs = this.props.travellersReducer.travellers.map((traveller, index) => (
+        let travellerTabs = this.state.travellers.map((traveller, index) => (
             <TravellerTab key={index} traveller={traveller}></TravellerTab>
         ));
 

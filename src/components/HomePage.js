@@ -1,31 +1,17 @@
 import React, { Component } from "react";
 import '../css/HomePage.css';
 import {connect} from "react-redux";
-import Auth from "../services/auth";
-
-const auth = new Auth();
 
 const mapStateToProps = state => ({
     ...state
 })
 
 const mapDispatchToProps = dispatch => ({
-    getCurrentSession(){
-        return auth.getCurrentSession().then(
-            res => dispatch({
-                type: 'SET_CURRENT_SESSION',
-                payload: res
-            })
-        )
-    }
+
 })
 
 class Home extends Component {
     componentDidMount(){
-        this.props.getCurrentSession().then(() => {
-            //TODO: Do stuff after getting session
-        });
-
         this.goToSignUpPage = this.goToSignUpPage.bind(this);
         this.goToTripsPage = this.goToTripsPage.bind(this);
     }

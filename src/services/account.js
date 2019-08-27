@@ -15,18 +15,6 @@ export default class Account {
         Account.instance = this;
     }
 
-    createUserIfNotExists = async (userToken, authName, authEmail) => {
-        return fetch(this.lambdaUrl + 'users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': userToken
-            },
-            body: JSON.stringify({email: authEmail, name: authName})
-        }).then(response => response.json())
-            .catch(err => err);
-    };
-
     setUserProfileDetails = (userToken, authEmail, details) => {
         return fetch(this.lambdaUrl + 'users/' + authEmail, {
             method: 'PUT',
