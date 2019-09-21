@@ -5,13 +5,8 @@ export default class Traveller {
     constructor(){
         if(Traveller.instance){return Traveller.instance;}
 
-        if(process.env.NODE_ENV === "production"){
-            this.lambdaUrl = 'PROD URL GOES HERE!';
-        }
-        else{
-            this.lambdaUrl = 'https://7leo8yxg49.execute-api.us-east-1.amazonaws.com/dev/';
-        }
-
+        this.lambdaUrl = process.env.REACT_APP_LAMBDA_URL;
+        
         Traveller.instance = this;
     }
 

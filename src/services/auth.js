@@ -17,12 +17,7 @@ export default class Auth {
         this.userPool = new CognitoUserPool(this.poolData);
         this.cognitoUser = null;
 
-        if(process.env.NODE_ENV === "production"){
-            this.lambdaUrl = 'PROD URL GOES HERE!';
-        }
-        else{
-            this.lambdaUrl = 'https://7leo8yxg49.execute-api.us-east-1.amazonaws.com/dev/';
-        }
+        this.lambdaUrl = process.env.REACT_APP_LAMBDA_URL;
 
         Auth.instance = this;
     }
